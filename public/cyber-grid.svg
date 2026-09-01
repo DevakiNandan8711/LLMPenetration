@@ -1,0 +1,24 @@
+<svg width="800" height="320" viewBox="0 0 800 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="320" rx="16" fill="#070A12"/>
+  <rect x="16" y="16" width="768" height="288" rx="12" stroke="#2E384F" stroke-width="2"/>
+  <g opacity="0.7">
+    <path d="M0 80H800" stroke="#1E2738"/>
+    <path d="M0 160H800" stroke="#1E2738"/>
+    <path d="M0 240H800" stroke="#1E2738"/>
+    <path d="M100 0V320" stroke="#1E2738"/>
+    <path d="M200 0V320" stroke="#1E2738"/>
+    <path d="M300 0V320" stroke="#1E2738"/>
+    <path d="M400 0V320" stroke="#1E2738"/>
+    <path d="M500 0V320" stroke="#1E2738"/>
+    <path d="M600 0V320" stroke="#1E2738"/>
+    <path d="M700 0V320" stroke="#1E2738"/>
+  </g>
+  <circle cx="120" cy="90" r="10" fill="#FF8C00"/>
+  <circle cx="320" cy="150" r="10" fill="#63D9FF"/>
+  <circle cx="520" cy="110" r="10" fill="#B99AFF"/>
+  <circle cx="680" cy="210" r="10" fill="#63E6BA"/>
+  <path d="M120 90L320 150L520 110L680 210" stroke="#FF8C00" stroke-width="3"/>
+  <text x="36" y="292" fill="#8CA1C9" font-size="22" font-family="Segoe UI, Arial, sans-serif">
+    HackSynth Visual Layer
+  </text>
+</svg>

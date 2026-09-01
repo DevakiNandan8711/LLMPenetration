@@ -1,0 +1,252 @@
+HackSynth – An Autonomous LLM-Driven
+Penetration Testing System
+Abstract
+HackSynth is an autonomous penetration-testing system powered by Large Language Models
+(LLMs) that performs multi-step cybersecurity tasks without human intervention. Inspired by
+Capture-the-Flag (CTF) challenges, the system behaves like an ethical hacker capable of
+planning attack sequences, executing terminal commands in a sandboxed environment, and
+summarizing results to determine the next logical action. HackSynth integrates two core
+LLM-based modules—Planner and Summarizer—connected through an iterative
+decision-making loop. The backend is implemented using FastAPI, Docker-based execution
+environments, and optional database logging (PostgreSQL/MongoDB). The frontend, developed
+using React, provides real-time logs, command history, performance metrics, and final flag
+results. This paper presents the system architecture, literature review, methodology,
+applications, and implementation strategies for building a safe and effective autonomous
+cybersecurity agent.
+Introduction
+Modern cybersecurity requires rapid vulnerability assessment and penetration testing, tasks that
+often demand expert knowledge and manual effort. Recent advancements in LLMs like GPT-4o,
+Llama-3, Qwen2, Mixtral, and Phi-3 have enabled systems to mimic human reasoning, making
+them suitable for guided and autonomous decision-making. HackSynth leverages these
+capabilities to automate ethical hacking workflows by generating terminal commands, analyzing
+outputs, and performing step-wise infiltration tasks in CTF-like environments.
+HackSynth addresses a major gap in cybersecurity automation: the inability of existing tools to
+autonomously plan multi-step attacks using natural language reasoning. With an LLM-powered
+planner, summarizer, and a secure execution loop, HackSynth provides a controlled, safe, and
+intelligent penetration testing agent for research, training, and evaluation.
+Literature Survey (2020–2024)
+(Recent works on LLM agents, autonomous penetration testing, cyber-reasoning systems, and
+CTF automation.)
+Year Author(s) Title Key Contribution Limitation
+202
+0
+Xu et al. “Cyber Reasoning
+Systems”
+Early automation of
+vulnerability discovery
+Lacked LLM
+intelligence
+202
+1
+Eberhardt et
+al.
+“AI in Cyber Threat
+Hunting”
+Showed ML models can
+detect threats
+Not autonomous or
+multi-step
+202
+2
+Kasper et al. “Automated CTF
+Solvers”
+Automated scripts for
+solving small CTF tasks
+Not planning-based
+202
+3
+OpenAI “GPT-4 Technical
+Report”
+Showed multi-step
+reasoning potential
+No hacking-focused
+design
+202
+3
+Meta “Llama-2 &
+Llama-Guard”
+Safe open-source LLM
+for reasoning tasks
+Limited command
+planning
+202
+3
+Chen et al. “LLM Agents for
+Sequential Tasks”
+Introduced agent loops
+for real-world tasks
+No cybersecurity
+application
+202
+4
+Wang et al. “LLM-Assisted
+Penetration Testing”
+First demonstration of
+LLM-based hacking
+Semi-automated
+only
+202
+4
+Anthropic “Claude 3 Safety
+Analysis”
+Provided high reasoning
+ability and safety
+Does not support
+sandbox execution
+202
+4
+Microsoft “Autonomous Agents
+with Phi-3”
+Lightweight reasoning
+models
+Not tested for CTF
+workflows
+202
+4
+Google
+DeepMind
+“Multi-agent System
+Reasoning”
+Showed cooperative
+LLM planning
+No security
+automation
+use-case
+Existing Work and Limitations
+1. Manual Penetration Testing
+● Requires domain experts
+● Time-consuming
+● Susceptible to human error
+● Not scalable
+2. Scripted / Automated Tools (e.g., Metasploit, Nmap automation)
+● Only perform predefined actions
+● Cannot reason or adapt
+● No multi-step logical planning
+3. ML-Based Cyber Tools
+● Focus on anomaly detection
+● Not capable of real penetration workflows
+● Do not generate commands or interpret terminal output
+4. Prior LLM Tools
+● Provide suggestions only
+● No secure sandbox execution
+● No agent loop
+● Cannot autonomously complete CTF tasks
+→ The limitation: Missing a fully autonomous, safe, and intelligent penetration-testing
+agent.
+Proposed Work: HackSynth Autonomous LLM Pentesting
+Agent
+HackSynth introduces a two-module LLM design:
+1️⃣Planner Module
+● Thinks like a hacker
+● Generates next attack command
+● Uses summarized history + environment description
+Example output:
+nmap -sV 10.0.0.5
+●
+2️⃣Summarizer Module
+● Reads raw terminal output
+● Extracts only useful details
+● Removes noise
+● Returns structured summary back to Planner
+Core Autonomous Loop
+1. Planner generates next command
+2. Executor runs command inside Docker container
+3. Summarizer interprets output
+4. Loop repeats until:
+○ Flag found
+○ Maximum steps reached
+○ Dead end or error detected
+Problem Statement
+“To design and implement an autonomous LLM-driven penetration-testing system that can plan,
+execute, summarize, and iteratively solve multi-step CTF challenges in a secure sandboxed
+environment without human intervention.”
+Objectives
+● Develop an AI agent that behaves like an ethical hacker
+● Automate terminal-based multi-step penetration testing
+● Use LLMs for reasoning, planning, and summarization
+● Execute commands safely using Docker sandbox
+● Provide real-time logs and visualization through React
+● Evaluate model performance (accuracy, token usage, safety, hallucinations)
+● Reduce manual effort in cybersecurity training
+● Support multiple LLMs via API or local models
+Working Model / Architecture
+1. React Frontend
+● Challenge loader
+● Agent control dashboard
+● Live logs console
+● Command history
+● Final flag viewer
+● Analytics (steps, tokens, errors)
+2. FastAPI Backend
+● /planner → Generates next command
+● /executor → Runs command inside Docker container
+● /summarizer → Summarizes last output
+● /run-loop → Full autonomous agent cycle
+● Safety checks + execution limits
+3. Docker Sandbox
+● Isolated environment
+● Restricted network access
+● Executes commands safely
+4. Databases (Optional: PostgreSQL / MongoDB)
+● Store logs
+● Store command sequences
+● Token usage analytics
+● Challenge runs history
+5. LLMs (GPT-4o, Llama-3, Phi-3, Qwen2, Mixtral)
+● Multi-model agent
+● API or self-hosted
+Architecture Diagram (Text Form)
+┌─────────────────────────┐
+│ React UI │
+│ Logs | Flags | Steps │
+└───────────┬────────────┘
+│
+HTTP (FastAPI)
+│
+┌───────────────────┴───────────────────┐
+│ Backend │
+│ /planner /summarizer /executor │
+└───────────────────┬───────────────────┘
+│
+┌─────────┴──────────┐
+│ LLM Models (API) │
+│ Planner + Summary │
+└─────────┬──────────┘
+│
+┌───────┴────────┐
+│ Docker Sandbox │
+│ Command Runner │
+└───────┬────────┘
+│
+┌─────────┴──────────┐
+│ DB Logs (Optional) │
+└─────────────────────┘
+Applications
+● Automated cybersecurity training
+● Autonomous CTF-solving platform
+● Benchmarking LLM performance in hacking tasks
+● Research on safe AI agents
+● Vulnerability discovery and analysis
+● Educational labs for colleges/universities
+● Pre-assessment tool for penetration testers
+● Red-team simulation for organizations
+Conclusion
+HackSynth demonstrates the potential of Large Language Models in autonomous penetration
+testing by enabling AI to plan and execute multi-step attacks in secure sandboxed
+environments. Using its Planner and Summarizer modules, HackSynth mirrors human ethical
+hacking behavior while maintaining safety and reproducibility. The combination of FastAPI,
+Docker sandboxing, React-based visualization, and multi-model LLM support enables a
+complete end-to-end research platform for experimenting with autonomous cybersecurity
+agents. This work highlights the feasibility and risks of LLM-driven cyber systems while
+contributing a foundation for future research in AI-based security automation.
+References (IEEE Format)
+[1] OpenAI, “GPT-4 Technical Report,” 2023.
+[2] Meta, “Llama 3 Model Card,” 2024.
+[3] Anthropic, “Claude 3 System Paper,” 2024.
+[4] Microsoft, “Phi-3 Technical Report,” 2024.
+[5] Y. Wang et al., “LLM-Assisted Penetration Testing,” IEEE Security & Privacy, 2024.
+[6] J. Xu et al., “Cyber Reasoning Systems,” IEEE S&P, 2020.
+[7] A. Kasper, “Automated CTF Solvers,” ACM Digital Library, 2022.
+[8] S. Chen et al., “LLM Agents for Sequential Tasks,” NeurIPS, 2023.
+[9] Google DeepMind, “Multi-agent System Planning,” 2024.
+[10] Eberhardt et al., “AI in Cyber Threat Hunting,” IEEE Access, 2021.

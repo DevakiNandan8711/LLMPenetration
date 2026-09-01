@@ -1,0 +1,40 @@
+# Build sandbox image first (required for real executor):
+#   docker compose build sandbox
+# Full stack (UI on http://localhost:8080, API on http://localhost:8000):
+#   docker compose up --build
+
+services:
+  sandbox:
+    build: ./sandbox
+    image: hacksynth-sandbox:latest
+    command: ["sleep", "infinity"]
+    restart: unless-stopped
+
+  api:
+    build: ./backend
+    image: hacksynth-api:latest
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    environment:
+      SANDBOX_IMAGE: hacksynth-sandbox:latest
+      DEMO_MODE: "false"
+      USE_MOCK_EXECUTOR: "false"
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - sandbox
+
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hacksynth-ui:latest
+    ports:
+      - "8080:80"
+    depends_on:
+      - api

@@ -1,0 +1,15 @@
+<svg width="640" height="320" viewBox="0 0 640 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="320" rx="16" fill="#0A0E16"/>
+  <rect x="24" y="24" width="592" height="272" rx="12" stroke="#2F3A54" stroke-width="2"/>
+  <rect x="60" y="128" width="140" height="64" rx="10" fill="#151D2C" stroke="#6FD0FF"/>
+  <rect x="250" y="48" width="140" height="64" rx="10" fill="#23180C" stroke="#FF8C00"/>
+  <rect x="250" y="206" width="140" height="64" rx="10" fill="#181229" stroke="#B99AFF"/>
+  <rect x="440" y="128" width="140" height="64" rx="10" fill="#102219" stroke="#63E6BA"/>
+  <path d="M200 160H250" stroke="#8CA1C9" stroke-width="2"/>
+  <path d="M390 80H440V160" stroke="#8CA1C9" stroke-width="2"/>
+  <path d="M390 238H440V160" stroke="#8CA1C9" stroke-width="2"/>
+  <text x="87" y="166" fill="#D9E6FF" font-size="16" font-family="Segoe UI, Arial, sans-serif">React UI</text>
+  <text x="279" y="86" fill="#FFD7A6" font-size="16" font-family="Segoe UI, Arial, sans-serif">Planner</text>
+  <text x="266" y="244" fill="#DCCBFF" font-size="16" font-family="Segoe UI, Arial, sans-serif">Summarizer</text>
+  <text x="478" y="166" fill="#C5FFE8" font-size="16" font-family="Segoe UI, Arial, sans-serif">Executor</text>
+</svg>

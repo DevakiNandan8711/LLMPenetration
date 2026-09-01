@@ -1,0 +1,27 @@
+:root {
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 10% 10%, #1a2440 0%, transparent 34%),
+    radial-gradient(circle at 90% 0%, #2a1705 0%, transparent 30%),
+    #050507;
+  color: #dfe7fb;
+}
+
+#root {
+  padding: 1rem;
+}
