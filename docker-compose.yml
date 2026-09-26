@@ -31,7 +31,7 @@ services:
 
   ui:
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
     image: hacksynth-ui:latest
     ports:
