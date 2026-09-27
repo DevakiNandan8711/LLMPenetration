@@ -6,10 +6,11 @@ This folder (`hacksynth-ui`) is the **project root**.
 
 | Path | Role |
 |------|------|
-| `src/` | React + Vite frontend |
+| `frontend/` | React + Vite frontend |
 | `backend/` | FastAPI backend (planner, summarizer, executor, run-loop) |
 | `sandbox/` | Docker image used by backend for command execution |
 | `docker-compose.yml` | Runs UI + API + sandbox services |
+| `render.yaml` | Render.com deployment blueprint |
 
 ---
 
@@ -84,6 +85,7 @@ Health check: [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health)
 Open a **second terminal** at `hacksynth-ui` root:
 
 ```powershell
+cd frontend
 npm install
 npm run dev
 ```
@@ -155,6 +157,7 @@ python main.py
 Terminal 2:
 
 ```powershell
+cd frontend
 npm run dev
 ```
 
@@ -176,3 +179,60 @@ docker compose up --build
 ```powershell
 Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 ```
+
+---
+
+## 9) Deploy to Render
+
+HackSynth can be deployed to [Render](https://render.com) as two web services (frontend + backend). The included `render.yaml` blueprint automates the setup.
+
+> **Note:** The sandbox service requires Docker socket access which Render doesn't provide. The backend runs with `USE_MOCK_EXECUTOR=true` on Render, meaning shell commands return simulated output.
+
+### Step-by-step
+
+1. **Push your code to GitHub:**
+
+```powershell
+git add .
+git commit -m "Add Render deployment config"
+git push origin main
+```
+
+2. **Go to Render Dashboard:**
+   - Visit [dashboard.render.com](https://dashboard.render.com)
+   - Click **New** → **Blueprint**
+   - Connect your GitHub repo
+
+3. **Render reads `render.yaml`** and creates two services:
+   - `hacksynth-api` — FastAPI backend (root dir: `backend/`)
+   - `hacksynth-ui` — React frontend with Nginx (root dir: `frontend/`)
+
+4. **Set your GROQ API key:**
+   - Render will prompt you during setup
+   - Or go to `hacksynth-api` → **Environment** → add `GROQ_API_KEY`
+
+5. **Wait for build & deploy** (~3-5 minutes). Your app will be live at:
+   - UI: `https://hacksynth-ui.onrender.com`
+   - API: `https://hacksynth-api.onrender.com`
+
+### Manual deployment (without Blueprint)
+
+If you prefer to create services manually instead of using the blueprint:
+
+**Backend:**
+1. New → Web Service → Connect repo
+2. **Root Directory:** `backend`
+3. **Environment:** Docker
+4. Add env vars: `GROQ_API_KEY`, `DEMO_MODE=false`, `USE_MOCK_EXECUTOR=true`
+
+**Frontend:**
+1. New → Web Service → Connect repo
+2. **Root Directory:** `frontend`
+3. **Environment:** Docker
+4. Add env var: `API_URL=https://hacksynth-api.onrender.com` (use your actual backend URL)
+
+### Render free tier notes
+
+- Free instances spin down after 15 minutes of inactivity
+- First request after spin-down takes ~30-60 seconds (cold start)
+- 750 free hours/month across all services
