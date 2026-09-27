@@ -36,6 +36,11 @@ services:
     dockerfilePath: ./Dockerfile
     plan: free
     envVars:
+      - key: API_URL
+        fromService:
+          name: hacksynth-api
+          type: web
+          env: public_url
       - key: VITE_API_URL
         fromService:
           name: hacksynth-api
