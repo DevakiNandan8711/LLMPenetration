@@ -36,8 +36,8 @@ services:
     dockerfilePath: ./Dockerfile
     plan: free
     envVars:
-      - key: API_URL
+      - key: VITE_API_URL
         fromService:
           name: hacksynth-api
           type: web
-          property: hostport           # Render injects internal host:port
+          env: public_url
