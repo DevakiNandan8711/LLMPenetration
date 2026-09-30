@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="shieldGrad" x1="16" y1="4" x2="48" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="65%" stop-color="#0099FF"/>
+      <stop offset="100%" stop-color="#0055D4"/>
+    </linearGradient>
+    <linearGradient id="shieldBg" x1="32" y1="5" x2="32" y2="59" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0E1726"/>
+      <stop offset="60%" stop-color="#060A12"/>
+      <stop offset="100%" stop-color="#030508"/>
+    </linearGradient>
+    <linearGradient id="boltGrad" x1="20" y1="46" x2="48" y2="24" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF5500"/>
+      <stop offset="50%" stop-color="#FF8C00"/>
+      <stop offset="100%" stop-color="#FFC837"/>
+    </linearGradient>
+    <linearGradient id="ringGrad" x1="10" y1="48" x2="56" y2="22" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF7700" stop-opacity="0.1"/>
+      <stop offset="30%" stop-color="#FF9900" stop-opacity="0.9"/>
+      <stop offset="70%" stop-color="#FFB300"/>
+      <stop offset="100%" stop-color="#FF5500" stop-opacity="0.2"/>
+    </linearGradient>
+    <filter id="neonCyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#00E5FF" flood-opacity="0.7"/>
+    </filter>
+    <filter id="neonOrange" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#FF8C00" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Orbital Ring Behind Shield -->
+  <path d="M 52 26 C 56 31, 46 42, 30 47 C 18 51, 10 48, 12 43" 
+        stroke="url(#ringGrad)" stroke-width="1.8" stroke-linecap="round" opacity="0.45" />
+
+  <!-- Main Cyber Shield -->
+  <path d="M 32 5 C 44 5, 52 7, 54 10 C 55 12, 55 15, 55 27 C 55 42, 42 53, 32 59 C 22 53, 9 42, 9 27 C 9 15, 9 12, 10 10 C 12 7, 20 5, 32 5 Z" 
+        fill="url(#shieldBg)" stroke="url(#shieldGrad)" stroke-width="2.6" filter="url(#neonCyan)" />
+
+  <!-- Inner Bevel Contour -->
+  <path d="M 32 9 C 42 9, 49 11, 51 13 C 52 15, 52 18, 52 27 C 52 39, 41 49, 32 54 C 23 49, 12 39, 12 27 C 12 18, 12 15, 13 13 C 15 11, 22 9, 32 9 Z" 
+        fill="#070B14" stroke="#172338" stroke-width="1.2" />
+
+  <!-- Shield Center Division Facet -->
+  <path d="M 32 9 V 54" stroke="#1D2E49" stroke-width="1" opacity="0.6"/>
+
+  <!-- Terminal Chevron '>' Prompt -->
+  <path d="M 22 19 L 29 26 L 22 33" 
+        stroke="#00E5FF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#neonCyan)" />
+
+  <!-- Terminal Cursor '_' -->
+  <path d="M 33 33 H 42" 
+        stroke="#00E5FF" stroke-width="3.6" stroke-linecap="round" filter="url(#neonCyan)" />
+
+  <!-- Synth Lightning Bolt Slash -->
+  <polygon points="19,45 32,34 28,34 38,24 33,32 46,32 31,46 34,39" 
+           fill="url(#boltGrad)" filter="url(#neonOrange)" />
+
+  <!-- Orbital Ring Front Arc -->
+  <path d="M 12 43 C 14 36, 26 27, 42 22 C 49 19.5, 53 21, 52 26" 
+        stroke="url(#ringGrad)" stroke-width="2.2" stroke-linecap="round" filter="url(#neonOrange)" />
+</svg>
