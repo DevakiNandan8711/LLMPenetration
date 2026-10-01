@@ -27,3 +27,8 @@ dist-ssr
 .env
 backend/.env
 .vercel
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/

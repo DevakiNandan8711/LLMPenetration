@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom'
 import './App.css'
 import agentNode from './assets/agent-node.svg'
-import { apiUrl, createChallenge, executeCommand, fetchChallenges, fetchHealth } from './api'
+import { apiUrl, createChallenge, executeCommand, fetchChallenges, fetchHealth, parseErrorResponse } from './api'
 
 const STORAGE_KEY = 'hacksynth-dashboard-state-v2'
 
@@ -328,7 +328,8 @@ function App() {
       setChallenges((items) => [local, ...items])
       setSelectedChallenge(local.id)
       setNewChallenge({ name: '', environment: '', difficulty: 'Custom', description: '' })
-      setChallengeError(`Backend save failed, so this challenge was added locally for this browser session. ${err?.message || ''}`.trim())
+      const errorDetail = err?.message ? `(${err.message})` : ''
+      setChallengeError(`Backend save failed, so this challenge was added locally for this browser session. ${errorDetail}`.trim())
     }
   }
 
@@ -482,8 +483,8 @@ function App() {
         signal,
       })
       if (!res.ok) {
-        const t = await res.text()
-        setLogs((existing) => [...existing, `[System] HTTP ${res.status}: ${t}`])
+        const t = await parseErrorResponse(res)
+        setLogs((existing) => [...existing, `[System] ${t}`])
         return
       }
       const reader = res.body?.getReader()
